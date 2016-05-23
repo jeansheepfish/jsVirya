@@ -1,0 +1,2 @@
+# jsVirya
+Virya of javascript
