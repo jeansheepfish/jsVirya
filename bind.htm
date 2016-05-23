@@ -1,0 +1,43 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+</head>
+
+<ul id='ul'>
+	<li>XXX111</li>
+	<li>XXX222</li>
+	<li>XXX333</li>
+	<li>XXX444</li>
+</ul>
+<script type='text/javascript'>
+	window.onload = function(){
+		//loopBind();
+		bubbleBind();
+	}
+
+	function loopBind(){
+		var ul = document.getElementById('ul');
+		var lis = ul.getElementsByTagName('li');
+		for (var i = lis.length-1; i>=0; i--){
+			lis[i].onclick = function(e){
+				console.log(this.innerHTML);
+			}
+		}
+	}
+
+	function bubbleBind(){
+		var ul = document.getElementById('ul');
+		ul.onclick = function(e){
+			console.log(window.event);
+			console.log(e);
+			e = window.event ? window.event : e;
+			console.log(e);
+			console.log(e.target);
+			console.log(e.srcElement);
+			var who = e.target ? e.target : e.srcElement;
+			console.log(who.innerText);
+		}
+	}
+</script>
+
+</html>
