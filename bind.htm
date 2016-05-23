@@ -28,12 +28,17 @@
 	function bubbleBind(){
 		var ul = document.getElementById('ul');
 		ul.onclick = function(e){
-			console.log(window.event);
-			console.log(e);
+			// console.log('window.event');
+			// console.log(window.event);
+			// console.log('e');
+			// console.log(e);
 			e = window.event ? window.event : e;
-			console.log(e);
-			console.log(e.target);
-			console.log(e.srcElement);
+			// console.log('e');
+			// console.log(e);
+			// console.log('e.target');
+			// console.log(e.target);
+			// console.log('e.srcElement');
+			// console.log(e.srcElement);
 			var who = e.target ? e.target : e.srcElement;
 			console.log(who.innerText);
 		}
