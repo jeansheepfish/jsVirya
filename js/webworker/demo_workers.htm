@@ -1,0 +1,23 @@
+<script type="text/javascript">
+	var worker;
+	worker = new Worker('demo_workers.js');
+
+	worker.onmessage = function(evt){
+
+	    alert('消息收到啦：'+ evt.data);
+
+	    worker.terminate();
+
+	};
+
+	worker.onerror = function(e){
+
+	    alert('demo出错了！出错原因是：' + e.message);
+
+	    worker.terminate();
+
+	};
+
+	worker.postMessage('这是webworker的demo！');
+
+</script>
