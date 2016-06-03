@@ -1,0 +1,37 @@
+<script type="text/javascript">
+console.log(`hello`);
+
+var Book = (function () {
+	// body...
+	var bookNum = 0;
+
+	_book.prototype = {
+		isJSBook : false,
+		display : function(){}
+	};
+
+})();
+
+var Book = function(title, time, type) {
+	// body...
+	if(this instanceof Book){
+		this.title = title;
+		this.time = time;
+		this.type = type;	
+	}else{
+		return new Book(title, time, type);
+	}
+
+}
+
+console.log(window.title);
+console.log(window.time);
+console.log(window.type);
+
+var book = Book(`JavaScript`,`2014`,`js`);
+console.log(book);
+
+console.log(window.title);
+console.log(window.time);
+console.log(window.type);
+</script>
