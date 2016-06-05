@@ -1,19 +1,10 @@
 <script type="text/javascript">
 console.log(`hello`);
 
-var Book = (function () {
-	// body...
-	var bookNum = 0;
-
-	_book.prototype = {
-		isJSBook : false,
-		display : function(){}
-	};
-
-})();
-
+//图书安全类
 var Book = function(title, time, type) {
 	// body...
+	console.log(this);
 	if(this instanceof Book){
 		this.title = title;
 		this.time = time;

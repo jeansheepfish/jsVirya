@@ -1,0 +1,19 @@
+<script type="text/javascript">
+
+function SuperClass(){
+	this.books = ['JavaScript', 'html', 'css'];
+}
+
+function SubClass(){}
+
+SubClass.prototype = new SuperClass();
+
+var instance1 = new SubClass();
+var instance2 = new SubClass();
+
+console.log(instance1.books);
+instance1.books.push('设计模式');
+console.log(instance1);
+console.log(instance2);
+
+</script>

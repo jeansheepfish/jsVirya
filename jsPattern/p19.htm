@@ -1,0 +1,27 @@
+<script type="text/javascript">
+function SuperClass(){
+	this.superValue = 'i am the super value';
+}
+SuperClass.prototype.getSuperValue = function(){
+	return this.superValue;
+}
+
+function SubClass(){
+	this.subValue = 'i am the sub value';
+}
+
+SubClass.prototype = new SuperClass();
+SubClass.prototype.getSubValue = function(){
+	return this.subValue;
+}
+
+var instance = new SubClass();
+// console.log(SuperClass.prototype.getSuperValue()); //undefined
+console.log(instance.getSuperValue());
+console.log(instance.getSubValue());
+
+console.log(instance instanceof SubClass);
+console.log(instance instanceof SuperClass);
+console.log(SubClass instanceof SuperClass);
+console.log(SubClass.prototype instanceof SuperClass);
+</script>
