@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<title>Express - Ajax</title>
+</head>
+<body>
+<script type="text/javascript">
+	function get_jsonp(){
+		console.log('get_jsonp');
+		$('#input-jsonp').val('JSONP info: ');
+		$.getJSON("http://localhost:3000/jsonp?callback=?",function(data){
+			$('#input-jsonp').val('JSONP info: ' + data.status);
+		});
+	}
+
+	function get_json(){
+		console.log('get_json');
+		$('#input-json').val('JSON info: ');
+		$.getJSON("http://localhost:3000/json?callback=?",function(data){
+			$('#input-json').val('JSON info: ' + data.status);
+		});
+	}
+</script>
+<p>Express - Ajax</p>
+<p>
+	<a href="javascript:get_jsonp();">点击调用 －jsonp</a><br>
+	<input id="input-jsonp" type="text" size="48"><br>
+</p>
+
+<p>
+	<a href="javascript:get_json();">点击调用 －json</a><br>
+	<input id="input-json" type="text" size="48"><br>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<script language ="javascript" type ="text/javascript" > 
+
+	var a = "before";
+
+	function fun() { 
+		console.log(a);//输出undefined 
+		var a = "after"; 
+		console.log(a);//输出改变了 
+	} 
+
+	console.log(a);//输出change 
+
+	fun(); 
+
+</script> 

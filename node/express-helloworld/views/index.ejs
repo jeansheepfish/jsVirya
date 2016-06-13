@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <p><a href="ajax.html">Click to ajax.html</a></p>
+    <form method="post" action="/login">
+	    <p>User id:<input type="text" name="userid" id="userid"></p>
+	    <p>Password:<input type="text" name="password" id="password"></p>
+	    <input type="submit" name="submit" id="submit" value="提交">
+    </form>
+  </body>
+</html>

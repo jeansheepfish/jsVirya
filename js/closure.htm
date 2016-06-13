@@ -1,0 +1,175 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+</head>
+
+
+<script type='text/javascript'>
+
+	var globalVal='this is a global value';
+
+	window.onload = function(){
+		printGlobalValue();//函数内部可以直接读取全局变量
+
+		//initInnerValue();//在函数外部自然无法读取函数内的局部变量
+		//console.log(innerValue); //Uncaught ReferenceError: innerValue is not defined
+
+		initFakeInnerValue();//函数内部声明变量的时候，一定要使用var命令。如果不用的话，你实际上声明了一个全局变量！（当函数被执行后）
+		console.log(fakeInnerValue); 
+
+		var result=bag();
+		result(); // 
+
+		var result2=bag2();
+		result2(); // 999
+		bagAdd();
+		result2(); // 1000
+		bagAdd();
+		result2(); // 1001
+
+	}
+
+　　function printGlobalValue(){
+　　　　console.log(globalVal);
+　　}
+
+	function initInnerValue(){
+　　　　var innerValue='this is a inner value';
+　　}
+
+	function initFakeInnerValue(){
+　　　　fakeInnerValue='this is a fake inner value';
+　　}
+
+	function bag(){
+
+		var innerBagValue='i am a inner value in bag';
+		/*
+			闭包就是能够读取其他函数内部变量的函数。
+			由于在Javascript语言中，只有函数内部的子函数才能读取局部变量，因此可以把闭包简单理解成"定义在一个函数内部的函数"。
+			所以，在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。
+		*/
+		function closure(){
+			console.log(innerBagValue);
+　　　　 }
+
+　　　　return closure;
+	}
+
+	/*
+		原因就在于f1是f2的父函数，而f2被赋给了一个全局变量，
+		这导致f2始终在内存中，而f2的存在依赖于f1，
+		因此f1也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收
+	*/
+	function bag2(){
+
+		var num=999;
+
+		bagAdd=function(){num+=1}
+
+		function closure2(){
+			console.log(num);
+		}
+
+		return closure2;
+	}
+
+	// var name = "The Name";
+	// var object = {
+	// 	getNameFunc : function(){
+	// 		return function(){
+	// 			console.log(this.name);
+	// 			return this.name;
+	// 		};
+	// 	}
+	// };
+	// console.log(object.getNameFunc()());
+
+	var name = "The Name";
+	var object = {
+		name : "My Name",
+		getNameFunc : function(){
+			console.log(this.name);
+			var that = this;
+			return function(){
+				console.log(this.name);
+				return that.name;
+			};
+		}
+	};
+	console.log(object.getNameFunc()());
+
+	//case 1
+	// var name = "The Window";
+	// var object = {
+	// 	name : "My Object",
+	// 	getNameFunc : function(){
+	// 		return function(){
+	// 			console.log(this.name);
+	// 			return this.name;
+	// 		};
+	// 	}
+	// };
+	// console.log(object.getNameFunc()());
+
+	//case 2
+	// var name = "The Window";
+	// var object = {
+	// 	name : "My Object",
+	// 	getNameFunc : function(){
+	// 		var that = this;
+	// 		return function(){
+	// 			console.log(this.name);
+	// 			return that.name;
+	// 		};
+	// 	}
+	// };
+	// console.log(object.getNameFunc()());
+
+
+	// var name = "The Window";
+	// var object = {
+	// 	name : "My Object",
+	// 	getNameFunc : function(){
+	// 		return (this.name);
+	// 	}
+	// };
+	// var name = object.getNameFunc();
+	// console.log(name); 
+
+	/*例子1变体*/
+	// var name = "The Window";
+	// var object = {
+	// 	name : "My Object",
+	// 	getNameFunc : function(){
+	// 		return function(){
+	// 			return this.name; //这个this是有上下文的限制的
+	// 		};
+	// 	}
+	// };
+	// var tmp = object.getNameFunc(); //此时没有执行this.name
+	// var name = tmp();//这个时候才执行，这时候的this上下文为全局
+	// console.log(name);
+	// //console.log(object.getNameFunc()())
+
+	/*例子2变体*/
+	var name = "The Window";
+	var object = {
+		name : "My Object",
+		getNameFunc : function(){
+			var that = this;
+			return function(){
+				return that.name;
+			};
+		}
+	};
+	var tmp = object.getNameFunc(); //这个时候执行了that = this，这里的this上下文是object,所以that指的是object
+	var name = object.getNameFunc()(); //这个时候执行了that.name
+	console.log(name);
+	//alert(object.getNameFunc()()); 
+
+
+
+</script>
+
+</html>

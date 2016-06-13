@@ -1,0 +1,59 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+</head>
+
+
+<script type='text/javascript'>
+
+	var val1 = 11;
+	val2 = 12;
+	var val3 = 13;
+	val4=funcB();
+
+	window.onload = function(){
+		funcA();
+		//funcB();
+
+		
+		//val4();
+		funcC();
+		//funcB()();
+		val4();
+
+		console.log(val1); 
+		console.log(val2);
+		console.log(val3); 
+
+	}
+
+	function funcA(){
+		var val1 = 101;
+		val2 = 102;
+		var val3 = 103;   //函数内部声明变量的时候，一定要使用var命令。如果不用的话，你实际上声明了一个全局变量！（当函数被执行后）
+　　}
+
+
+	function funcB(){
+
+		val1 = 1001;
+		var val2 = 1002;
+		var val3 = 1003;   
+
+		funcC=function(){
+			val1*=10;
+			val2*=10;
+			val3*=10;
+		}
+
+		return function funcD(){
+			console.log(val1); 
+			console.log(val2);
+			console.log(val3); 
+		};
+	}
+
+
+</script>
+
+</html>
