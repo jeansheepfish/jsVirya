@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>微信功能測試</title>
+    <script src="/my_static/js/flexible.js"></script>
+    <script src="/my_static/js/jweixin-1.2.0.js"></script>
+    <script src="/my_static/js/jquery-2.1.1.js"></script>
+
+    <link rel="stylesheet" href="/sy_static/framework7/dist/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="/sy_static/framework7/dist/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="/sy_static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/my_static/css/my-app.css">
+</head>
+<body>
+
+<div class="statusbar-overlay"></div>
+
+<div id="global_data"></div>
+
+<div class="views">
+    <div class="view view-main">
+
+        <div class="pages navbar-through">
+            <div data-page="registered" class="page no-navbar">
+                <div class="page-content registered">
+
+                    <div class="top">
+                        <img src="/my_static/images/2x/reg_ok.png">
+                    </div>
+
+                    <div class="registered-title font-32">
+                        <p><%= outputStr %></p>
+                    </div>
+                    <div>
+                        <button class="btn btn_primary font-32" id="addCard" >addCard</button>
+                    </div>
+                    <div>
+                        <button class="btn btn_primary font-32" id="getNetworkType" >getNetworkType</button>
+                    </div>
+                    <div class="bottom">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script type="text/javascript" charset="utf-8">
+
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: 'oux1KwGR50XYgbesbfR1zohal1IQ', // 必填，公众号的唯一标识
+        timestamp: 1507876737, // 必填，生成签名的时间戳
+        nonceStr: 'Wm3WZYTPz0wzccnW', // 必填，生成签名的随机串
+        signature: 'cf13c69665f1600b29e53bdbd21b8e72495a37e7',// 必填，签名，见附录1
+        jsApiList: ['addCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    wx.ready(function () {
+        $("#addCard").click(function () {
+            wx.addCard({
+                cardList: [{
+                    cardId: 'pux1KwEcfj4ebfP6joPwR7p4SzVg',
+                    cardExt: '{"code":null,"openid":null,"timestamp":1507876737,"outer_str":null,"signature":"69ec0cd03ce2d97499a385a12cbf111d340ca2fa"}'
+                }], // 需要添加的卡券列表
+                success: function (res) {
+                    alert('success');
+                    var cardList = res.cardList; // 添加的卡券列表信息
+                }
+            });
+        });
+
+        $("#getNetworkType").click(function () {
+            wx.getNetworkType({
+                success: function (res) {
+                    var networkType = res.networkType; // 返回网络类型2g，3g，4g，wifi
+                    alert(networkType);
+                }
+            });
+        });
+
+        wx.onMenuShareTimeline({
+            title: 'aaa', // 分享标题
+            link: 'https://ucdev-90.jswym.com/90/test/material', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: '', // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                alert('success');
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+                alert('cancel');
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
